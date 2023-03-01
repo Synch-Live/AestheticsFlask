@@ -20,7 +20,10 @@ lib = Library.all()
 
 @app.route("/")
 def index():
+    global p
+    p = Participant()
     return render_template("index.html")
+
 
 @app.route("/participant", methods = [ 'GET', 'POST' ])
 def participant():
@@ -78,5 +81,6 @@ def video():
         logging.info(f"Save rating {r} for {p.pid} and {v.vid}")
         return _getvideo()
 
+
 if __name__ == '__main__':
-    app.run(debug = True)
+    app.run()
