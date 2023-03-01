@@ -1,0 +1,54 @@
+body, form {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+body, h1, h2, p, li, a, form, input, select, button, div {
+    background: #000;
+    font-family: monospace;
+    color: #fff;
+    text-align: center;
+}
+
+input:invalid {
+  border: 1px solid red;
+}
+
+input:valid {
+  border: 1px solid green;
+}
+
+input[type='number'], input[type='text'], select {
+    width: 400px;
+}
+
+body, p, li, a, form, input, select, button {
+    font-size: 18px;
+}
+
+h1, h2 {
+    margin-top: 30px;
+}
+
+button, a.button {
+    padding: 5px;
+    border: 1px solid white;
+    display: block;
+    text-decoration: none;
+    margin: 0 auto;
+    width: 120px;
+    font-size: 24px;
+}
+
+input[type='range'] {
+    width: 760px;
+    margin: 10px 20px;
+}
+.rangeticks {
+  width: 810px;
+  display: flex;
+}
+.rangeticks span {
+  flex: auto;
+  width: 10%;
+}

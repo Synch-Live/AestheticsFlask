@@ -1,0 +1,40 @@
+<html>
+  <head>
+    <title>Synch.Live</title>
+    <link rel="stylesheet" href="/static/styles.css">
+  </head>
+  <body>
+    <h1>Video Rating</h1>
+
+    <p>
+    After viewing, please choose a rating from 1-10. 
+    You can replay the video if you need to.
+    </p>
+
+    <video controls width="800" autoplay>
+		<source src="/{{ video.fname }}" type="video/mp4">
+	</video>
+
+	<form action="{{ url_for('video') }}" method="post">
+        <input type="hidden" id="pid"    name="pid"     value="{{ participant.pid }}">
+        <input type="hidden" id="vid"    name="vid"     value="{{ video.vid }}">
+        <input type="hidden" id="psi"    name="psi"     value="{{ video.psi }}">
+		<input type="range"  id="rating" name="rating"  value="{{ video.rating }}" min="1" max="10" >
+        <div class="rangeticks">
+            <span>1</span>
+            <span>2</span>
+            <span>3</span>
+            <span>4</span>
+            <span>5</span>
+            <span>6</span>
+            <span>7</span>
+            <span>8</span>
+            <span>9</span>
+            <span>10</span>
+        </div>
+
+		<button type="submit">Next</button>
+	</form>
+
+  </body>
+</html>

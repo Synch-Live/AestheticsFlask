@@ -1,0 +1,62 @@
+<html>
+  <head>
+    <title>Participant Data</title>
+    <link rel="stylesheet" href="/static/styles.css">
+  </head>
+  <body>
+    <h1>Participant Data</h1>
+    <p>
+    <i>Your data will be kept pseudo-anonymous and once you have completed and submitted the experiment, you will no longer be able to withdraw your data.</i>
+    </p>
+
+    <form action="{{ url_for('participant') }}" method="post">
+      <table>
+      <tr>
+      <td>
+        <label for="pid">Participant ID: </label>
+      </td>
+      <td>
+        <input type="text" id="pid" name="pid" value="{{ data.pid }}" min="3" required>
+      </td>
+      </tr>
+      <tr>
+      <td>
+        <label for="age">Age: </label>
+      </td>
+      <td>
+        <input type="number" id="age" name="age" value="{{ data.age }}" min="18" max="110" required>
+      </td>
+      </tr>
+      <tr>
+      <td>
+        <label for="gender">Gender: </label>
+      </td>
+      <td>
+        <select type="text" id="gender" name="gender" selected="{{ data.gender }}">
+            {% for opt in genders %}
+            <option value="{{ opt }}" {{ 'selected' if data.gender == opt else '' }}>{{ opt.prt() }}</option>
+            {% endfor %}
+        </select>
+      </td>
+      </tr>
+      <tr>
+      <td>
+        <label for="ethnicity">Ethnicity: </label>
+      </td>
+      <td>
+        <select type="text" id="ethnicity" name="ethnicity" selected="{{ data.ethnicity }}">
+            {% for opt in ethnicities %}
+            <option value="{{ opt }}" {{ 'selected' if data.ethnicity == opt else '' }}>{{ opt.prt() }}</option>
+            {% endfor %}
+        </select>
+      </td>
+      </tr>
+      </table>
+
+      <br/><br/>
+
+      <button type="submit">Next</button>
+    </form>
+
+  </body>
+</html>
