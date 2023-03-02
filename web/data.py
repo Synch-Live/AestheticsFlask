@@ -56,7 +56,10 @@ class Ethnicity(EnumStr):
 
 class Video():
     def __init__(self, fname: str, psi: float) -> None:
-        self.fname  = os.path.join("static/videos", fname)
+        if not fname.endswith('.mp4'):
+            fname = f"{fname}.mp4"
+
+        self.fname  = os.path.join(os.path.join("static", "videos"), fname)
         self.vid    = fname.split('.')[0]
         self.psi    = psi
         self.rating = -1
@@ -75,18 +78,13 @@ class Video():
         assert(type(rating) is int and 0 < rating <= 10)
         self.rating = rating
 
-    def save(self) -> None:
-        with open(f"static/data/v_{self.pid}.csv", 'w') as fh:
-            for v in self.videos:
-                fh.write(f"{v.vid},{v.psi},{v.rating}\n")
-            fh.flush()
-
 
 class Library():
     @staticmethod
     def all() -> List['Video']:
         videos = []
-        with open('static/videos.csv') as csvf:
+        path = os.path.abspath(os.path.join('static', 'videos.csv'))
+        with open(path, 'r') as csvf:
             csvr = csv.reader(csvf, delimiter = ',')
             for row in csvr:
                 # A01_07.mp4, -2.3849239
@@ -118,11 +116,18 @@ class Participant():
         self.videos.append(v)
 
     def save(self) -> None:
-        with open(f"static/data/p_{self.pid}.csv", 'w') as fh:
+        path = os.path.abspath(os.path.join('static', 'data'))
+        print(path)
+
+        with open(os.path.join(path, f"p_{self.pid}.csv"), 'w') as fh:
             fh.write(f"ID,{self.pid}\n")
             fh.write(f"Age,{self.age}\n")
             fh.write(f"Gender,{self.gender}\n")
             fh.write(f"Ethnicity,{self.ethnicity}\n")
             fh.flush()
 
+        with open(os.path.join(path, f"v_{self.pid}.csv"), 'w') as fh:
+            for v in self.videos:
+                fh.write(f"{v.vid},{v.psi},{v.rating}\n")
+            fh.flush()
 
