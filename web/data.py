@@ -62,7 +62,7 @@ class Video():
         self.fname  = os.path.join(os.path.join("static", "videos"), fname)
         self.vid    = fname.split('.')[0]
         self.psi    = psi
-        self.rating = -1
+        self.rating = 5 # set to the midde of scale, to avoid skewed stats
 
     @classmethod
     def random(self, vids: List['Video'], seen: List['Video'] = []) -> Optional['Video']:
@@ -117,7 +117,6 @@ class Participant():
 
     def save(self) -> None:
         path = os.path.abspath(os.path.join('static', 'data'))
-        print(path)
 
         with open(os.path.join(path, f"p_{self.pid}.csv"), 'w') as fh:
             fh.write(f"ID,{self.pid}\n")
